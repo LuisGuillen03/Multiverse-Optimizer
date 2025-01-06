@@ -11,7 +11,6 @@ MVO::~MVO()
 
 }
 
-
 void Sort(float Inflation_rates[], float* Universes[],int N) // BubbleSort Optimized
 {
 	bool swapped;
@@ -67,7 +66,7 @@ void MVO::Calculate(float* Best_universe_Inflation_rate, float*& Best_Universe, 
 					if (Universes[i][j] > ub[0] || Universes[i][j] < lb[0])
 					{
 						float randomN = (float)rand() / (float)RAND_MAX;
-						Universes[i][j] = randomN * ((ub[0] - lb[0]) + lb[0]);
+						Universes[i][j] = randomN * (ub[0] - lb[0]) + lb[0];
 					}
 				}
 				else
@@ -75,7 +74,7 @@ void MVO::Calculate(float* Best_universe_Inflation_rate, float*& Best_Universe, 
 					if (Universes[i][j] > ub[j] || Universes[i][j] < lb[j])
 					{
 						float randomN = (float)rand() / (float)RAND_MAX;
-						Universes[i][j] = randomN * ((ub[j] - lb[j]) + lb[j]);
+						Universes[i][j] = randomN * (ub[j] - lb[j]) + lb[j];
 					}
 				}
 			}
@@ -116,7 +115,7 @@ void MVO::Calculate(float* Best_universe_Inflation_rate, float*& Best_Universe, 
 		for (int i = 1; i < N; i++) //Starting from 1 since the 0 one is the elite
 		{
 			Black_hole_index = i;
-			for (int j = 1; j < dim; j++)
+			for (int j = 0; j < dim; j++)
 			{
 				float r1 = (float)rand() / (float)RAND_MAX;
 				if (r1 < normalized_sorted_Inflation_rates[i])
@@ -166,13 +165,14 @@ void MVO::Calculate(float* Best_universe_Inflation_rate, float*& Best_Universe, 
 				}
 
 			}
-			Convergence_curve = Best_universe_Inflation_rate;
-			if (Time % 50 == 0)
-			{
-				cout << "At iteration " << Time << " the best universes fitness is " << *Best_universe_Inflation_rate <<endl;
-			}
-			Time++;
+
 		}
+		Convergence_curve[Time-1] = *Best_universe_Inflation_rate;
+		if (Time % 50 == 0)
+		{
+			cout << "At iteration " << Time << " the best universes fitness is " << *Best_universe_Inflation_rate << endl;
+		}
+		Time++;
 	}
 }
 

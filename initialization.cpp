@@ -19,7 +19,7 @@ void initialization::initiali(float* Universes [], int N, int dim, float lb[], f
 			for (int j = 0; j < dim; j++)
 			{
 				float randomN = (float)rand() / (float)RAND_MAX;
-				Universes[i][j] = randomN * ((ub[0] - lb[0]) + lb[0]);
+				Universes[i][j] = randomN * (ub[0] - lb[0]) + lb[0];
 			}
 		}
 	}
@@ -31,7 +31,7 @@ void initialization::initiali(float* Universes [], int N, int dim, float lb[], f
 			for (int j = 0; j < dim; j++)
 			{
 				float randomN = (float)rand() / (float)RAND_MAX;
-				Universes[i][j] = randomN * ((ub[j] - lb[j]) + lb[j]);
+				Universes[i][j] = randomN * (ub[j] - lb[j]) + lb[j];
 			}
 		}
 	}
